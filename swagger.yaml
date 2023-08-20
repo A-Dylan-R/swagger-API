@@ -192,7 +192,7 @@ components:
           example: 20
         name:
           type: string
-          example: "John Doe"
+          example: "Aina Dylan"
         subject:
           type: string
-          example: "Computer Science"
+          example: "Cyber Security"
