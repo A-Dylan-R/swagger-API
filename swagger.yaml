@@ -21,73 +21,153 @@ tags:
       url: http://swagger.io
 paths:
   /students:
+    get:
+      tags:
+        - students
+      summary: Get a list of students
+      description: Retrieve a list of all students
+      operationId: getStudentsList
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Students"
     put:
       tags:
         - students
-      summary: Update an existing students
-      description: Update an existing students by Id
-      operationId: updatePet
+      summary: Update an existing student
+      description: Update an existing student by Id
+      operationId: updateStudent
       requestBody:
-        description: Update an existent students 
+        description: Update an existing student
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Students'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Students'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Students'
-        required: true
+              $ref: "#/components/schemas/Students"
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Students'          
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Students'
-        '400':
-          description: Invalid ID supplied
-        '404':
-          description: Student not found
-        '405':
-          description: Validation exception
+                $ref: "#/components/schemas/Students"
     post:
       tags:
         - students
-      summary: Add a new students 
-      description: Add a new students 
-      operationId: addStudents
+      summary: Add a new student
+      description: Add a new student
+      operationId: addStudent
       requestBody:
-        description: Create a new students
+        description: Create a new student
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Students'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Students'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Students'
-        required: true
+              $ref: "#/components/schemas/Students"
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Students'          
-            application/xml:
+                $ref: "#/components/schemas/Students"
+  /students/{studentId}:
+    delete:
+      tags:
+        - students
+      summary: Delete a student
+      description: Delete a student by Id
+      operationId: deleteStudent
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          description: ID of the student to delete
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: Student deleted successfully
+  /teachers:
+    get:
+      tags:
+        - teachers
+      summary: Get a list of teachers
+      description: Retrieve a list of all teachers
+      operationId: getTeachersList
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
               schema:
-                $ref: '#/components/schemas/Students'
-        '405':
-          description: Invalid input
-            - read:students
+                type: array
+                items:
+                  $ref: "#/components/schemas/Teacher"
+    put:
+      tags:
+        - teachers
+      summary: Update an existing teacher
+      description: Update an existing teacher by Id
+      operationId: updateTeacher
+      requestBody:
+        description: Update an existing teacher
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Teacher"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Teacher"
+    post:
+      tags:
+        - teachers
+      summary: Add a new teacher
+      description: Add a new teacher
+      operationId: addTeacher
+      requestBody:
+        description: Create a new teacher
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Teacher"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Teacher"
+  /teachers/{teacherId}:
+    delete:
+      tags:
+        - teachers
+      summary: Delete a teacher
+      description: Delete a teacher by Id
+      operationId: deleteTeacher
+      parameters:
+        - name: teacherId
+          in: path
+          required: true
+          description: ID of the teacher to delete
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: Teacher deleted successfully
 components:
   schemas:
     Students:
@@ -103,3 +183,16 @@ components:
         birthdate:
           type: string
           example: "2005-01-03"
+    Teacher:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 20
+        name:
+          type: string
+          example: "John Doe"
+        subject:
+          type: string
+          example: "Computer Science"
